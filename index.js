@@ -2,39 +2,19 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const contacts = require("./routes/contacts");
 
 const app = express();
 
-app.use(bodyParser.json());
-
 const port = ( process.env.PORT || 3000);
 
-let base = '/api/v1';
+let baseApi = '/api/v1';
 
-const contacts = [
-    {
-        "name": "Pepe",
-        "phone": "111222333",
-        "email": "pepe@pepe.com"
-    },
-    {
-        "name": "Antonio",
-        "phone": "444555666",
-        "email": "antonio@antonio.com"
-    }
-];
+app.use(bodyParser.json());
 
-// ROUTES
-
-app.get(base + '/contacts', (req, res) => {
-    res.send(contacts);
-});
-
-app.post(base + '/contacts', (req, res) => {
-   contacts.push(req.body);
-   res.sendStatus(201);
-   res.send(req.body);
-});
+app.get(baseApi + '/contacts', contacts.list);
+app.post(baseApi + '/contacts', contacts.create);
+app.delete(baseApi + '/contacts/:name', contacts.deleteUser);
 
 
 app.use((request, response) => {

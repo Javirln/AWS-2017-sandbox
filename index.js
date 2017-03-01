@@ -33,7 +33,7 @@ app.get(base + '/contacts', (req, res) => {
 app.post(base + '/contacts', (req, res) => {
    contacts.push(req.body);
    res.send(req.body);
-   res.statusCode = 201;
+   res.sendStatus(201);
 });
 
 

@@ -33,6 +33,6 @@ module.exports.deleteUser = (req, res) => {
         contacts.splice(index, 1);
         res.send(contacts);
     } else {
-        res.sendStatus(404);
+        res.sendStatus('404');
     }
 };

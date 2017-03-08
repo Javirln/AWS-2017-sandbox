@@ -67,7 +67,7 @@ router.put('/:name', function (req, res) {
 
 router.delete('/:name', function (req, res) {
     
-    db.remove({},{multi: true},(err, numRemoved) => {
+    db.remove({name: req.params.name},{multi: true},(err, numRemoved) => {
         if (err) {
             res.status(404).send({msg: err});
         } else {

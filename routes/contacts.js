@@ -2,59 +2,62 @@
 
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const dataStore = require('nedb');
 
-const contacts = [
-    {
-        "name": "Pepe",
-        "phone": "111222333",
-        "email": "pepe@pepe.com"
-    },
-    {
-        "name": "Antonio",
-        "phone": "444555666",
-        "email": "antonio@antonio.com"
-    }
-];
+
+const dbFilename = path.join(__dirname, '../contacts.json');
+
+const db = new dataStore({
+   filename: dbFilename,
+   autoload: true,
+   corruptAlertThreshold: 1
+});
 
 router.get('/', function (req, res) {
-    res.status(200).send(contacts);
+    
+    db.find({}, (err, contacts) => {
+        if (err) {
+            res.status(404).send({msg: err});
+        } else {
+            res.status(200).send(contacts);   
+        }
+    });
+    
 });
 
 router.get('/:name', function (req, res) {
     const name = req.params.name;
     
-    const contact = (contacts.filter((contact) => {
-       return contact.name === name; 
-    })[0]);
-    
-    if (contact != undefined){
-        res.status(200).send(contact);
-    } else {
-        res.status(404).send({msg: 'The user does not exist'});
-    }
-    
+    db.find({name: name}, (err, contact) => {
+        if (err) {
+            res.status(404).send({msg: err});
+        } else {
+            res.status(200).send(contact);   
+        }
+    });
+
 });
 
 router.post('/', function (req, res) {
-    contacts.push(req.body);
+    
+    db.insert(req.body);
+    
     res.status(201).send(req.body);
 });
-
+/**
 router.put('/:name', function (req, res) {
     const name = req.params.name;
     const updatedContact = req.body;
     
-    const cont = 0;
-    
     contacts = contacts.map((contact) => {
         if (contact.name == name) {
-            cont++;
             return updatedContact;
         } else {
             return contact;
         }
     });
-    res.status(200).send({msg: `${cont} contacts updated`});
+    res.status(200).send('Contacts updated');
 });
 
 
@@ -71,12 +74,18 @@ router.delete('/:name', function (req, res) {
         res.sendStatus('404');
     }
 });
-
+**/
 router.delete('/', function (req, res) {
-    contacts = [];
-    res.status(200).send(contacts);
+    
+    db.remove({},{multi: true},(err, numRemoved) => {
+        if (err) {
+            res.status(404).send({msg: err});
+        } else {
+            res.status(200).send(numRemoved);  
+        }
+    });
+    
 });
-
 
 
 module.exports = router;

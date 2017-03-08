@@ -1,14 +1,13 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
-const contacts = require("./routes/contacts");
-
 const app = express();
-
 const port = ( process.env.PORT || 3000);
 
-let baseApi = '/api/v1';
+const bodyParser = require('body-parser');
+
+const contacts = require("./routes/contacts");
+const baseApi = '/api/v1';
 
 app.use(bodyParser.json());
 

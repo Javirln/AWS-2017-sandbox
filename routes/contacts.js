@@ -45,7 +45,7 @@ router.put('/:name', function (req, res) {
     const name = req.params.name;
     const updatedContact = req.body;
     
-    let cont = 0;
+    const cont = 0;
     
     contacts = contacts.map((contact) => {
         if (contact.name == name) {

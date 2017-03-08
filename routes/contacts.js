@@ -10,8 +10,7 @@ const dbFilename = path.join(__dirname, '../contacts.json');
 
 const db = new dataStore({
    filename: dbFilename,
-   autoload: true,
-   corruptAlertThreshold: 1
+   autoload: true
 });
 
 router.get('/', function (req, res) {
@@ -57,9 +56,11 @@ router.put('/:name', function (req, res) {
     
     db.update({name: name},updatedContact,{},(err, numUpdates) => {
         if (err || numUpdates == 0) {
-            res.status(404).send({msg: err});
+            res.statusCode = 404;
+            res.send({msg: err})
         } else {
-            res.status(200).send(numUpdates);  
+            res.statusCode = 200;
+            res.send(numUpdates);
         }
     });
 });
@@ -71,7 +72,8 @@ router.delete('/:name', function (req, res) {
         if (err) {
             res.status(404).send({msg: err});
         } else {
-            res.status(200).send(numRemoved);  
+            res.statusCode = 200;
+            res.send(numRemoved);
         }
     });
     
@@ -83,11 +85,11 @@ router.delete('/', function (req, res) {
         if (err) {
             res.status(404).send({msg: err});
         } else {
-            res.status(200).send(numRemoved);  
+            res.statusCode = 200;
+            res.send(numRemoved);
         }
     });
     
 });
-
 
 module.exports = router;

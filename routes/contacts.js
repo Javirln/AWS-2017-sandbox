@@ -18,7 +18,7 @@ const contacts = [
 ];
 
 router.get('/', function (req, res) {
-    res.send(contacts);
+    res.status(200).send(contacts);
 });
 
 router.get('/:name', function (req, res) {
@@ -38,11 +38,28 @@ router.get('/:name', function (req, res) {
 
 router.post('/', function (req, res) {
     contacts.push(req.body);
-    res.sendStatus(201);
-    res.send(req.body);
+    res.status(201).send(req.body);
 });
 
-router.delete('/', function (req, res) {
+router.put('/:name', function (req, res) {
+    const name = req.params.name;
+    const updatedContact = req.body;
+    
+    let cont = 0;
+    
+    contacts = contacts.map((contact) => {
+        if (contact.name == name) {
+            cont++;
+            return updatedContact;
+        } else {
+            return contact;
+        }
+    });
+    res.status(200).send({msg: `${cont} contacts updated`});
+});
+
+
+router.delete('/:name', function (req, res) {
     const toDelete = contacts.filter(item => {
        return item.name != req.params.name; 
     });
@@ -55,5 +72,12 @@ router.delete('/', function (req, res) {
         res.sendStatus('404');
     }
 });
+
+router.delete('/', function (req, res) {
+    contacts = [];
+    res.status(200).send(contacts);
+});
+
+
 
 module.exports = router;

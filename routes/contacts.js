@@ -1,5 +1,9 @@
 'use strict';
 
+const express = require('express');
+const router = express.Router();
+
+
 const contacts = [
     {
         "name": "Pepe",
@@ -13,17 +17,32 @@ const contacts = [
     }
 ];
 
-module.exports.list = (req, res) => {
+router.get('/', function (req, res) {
     res.send(contacts);
-};
+});
 
-module.exports.create = (req, res) => {
+router.get('/:name', function (req, res) {
+    const name = req.params.name;
+    
+    const contact = (contacts.filter((contact) => {
+       return contact.name === name; 
+    })[0]);
+    
+    if (contact != undefined){
+        res.status(200).send(contact);
+    } else {
+        res.status(404).send({msg: 'The user does not exist'});
+    }
+    
+});
+
+router.post('/', function (req, res) {
     contacts.push(req.body);
     res.sendStatus(201);
     res.send(req.body);
-};
+});
 
-module.exports.deleteUser = (req, res) => {
+router.delete('/', function (req, res) {
     const toDelete = contacts.filter(item => {
        return item.name != req.params.name; 
     });
@@ -35,4 +54,6 @@ module.exports.deleteUser = (req, res) => {
     } else {
         res.sendStatus('404');
     }
-};
+});
+
+module.exports = router;

@@ -12,10 +12,7 @@ let baseApi = '/api/v1';
 
 app.use(bodyParser.json());
 
-app.get(baseApi + '/contacts', contacts.list);
-app.post(baseApi + '/contacts', contacts.create);
-app.delete(baseApi + '/contacts/:name', contacts.deleteUser);
-
+app.use(baseApi + '/contacts', contacts);
 
 app.use((request, response) => {
     response.statusCode = 404;

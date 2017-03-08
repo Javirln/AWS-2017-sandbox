@@ -33,7 +33,7 @@ router.get('/:name', function (req, res) {
         if (err) {
             res.status(404).send({msg: err});
         } else {
-            res.status(200).send(contact);   
+            res.status(200).send(contact[0]);   
         }
     });
 
@@ -41,40 +41,42 @@ router.get('/:name', function (req, res) {
 
 router.post('/', function (req, res) {
     
-    db.insert(req.body);
+    db.insert(req.body, (err, newDoc) => {
+        if (err || newDoc == undefined) {
+            res.status(404).send({msg: err});
+        } else {
+            res.status(201).send(req.body);       
+        }
+    });
     
-    res.status(201).send(req.body);
 });
-/**
+
 router.put('/:name', function (req, res) {
     const name = req.params.name;
     const updatedContact = req.body;
     
-    contacts = contacts.map((contact) => {
-        if (contact.name == name) {
-            return updatedContact;
+    db.update({name: name},updatedContact,{},(err, numUpdates) => {
+        if (err || numUpdates == 0) {
+            res.status(404).send({msg: err});
         } else {
-            return contact;
+            res.status(200).send(numUpdates);  
         }
     });
-    res.status(200).send('Contacts updated');
 });
 
 
 router.delete('/:name', function (req, res) {
-    const toDelete = contacts.filter(item => {
-       return item.name != req.params.name; 
+    
+    db.remove({},{multi: true},(err, numRemoved) => {
+        if (err) {
+            res.status(404).send({msg: err});
+        } else {
+            res.status(200).send(numRemoved);  
+        }
     });
-
-    let index = contacts.indexOf(toDelete[0]);
-    if (index > -1) {
-        contacts.splice(index, 1);
-        res.send(contacts);
-    } else {
-        res.sendStatus('404');
-    }
+    
 });
-**/
+
 router.delete('/', function (req, res) {
     
     db.remove({},{multi: true},(err, numRemoved) => {

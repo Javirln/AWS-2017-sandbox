@@ -3,6 +3,7 @@ angular.module('ContactListApp').controller('ListController', function ($scope, 
     function refresh(){
         $http.get('/api/v1/contacts').then(function (response){
             $scope.contacts = response.data;
+            $scope.newContact = {};
         });   
     }
     

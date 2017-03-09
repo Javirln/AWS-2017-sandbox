@@ -60,7 +60,7 @@ router.put('/:name', function (req, res) {
             res.send({msg: err})
         } else {
             res.statusCode = 200;
-            res.send(numUpdates);
+            res.send(numUpdates.toString());
         }
     });
 });
@@ -73,7 +73,7 @@ router.delete('/:name', function (req, res) {
             res.status(404).send({msg: err});
         } else {
             res.statusCode = 200;
-            res.send(numRemoved);
+            res.send(numRemoved.toString());
         }
     });
     
@@ -86,7 +86,7 @@ router.delete('/', function (req, res) {
             res.status(404).send({msg: err});
         } else {
             res.statusCode = 200;
-            res.send(numRemoved);
+            res.send(numRemoved.toString());
         }
     });
     

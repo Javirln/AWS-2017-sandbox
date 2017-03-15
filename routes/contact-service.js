@@ -1,20 +1,25 @@
 'use strict';
 
-const DataStore = require('nedb');
-const path = require('path');
-
-const dbFilename = path.join(__dirname, '../contacts.json');
-
-const db = new DataStore({
-   filename: dbFilename,
-   autoload: true
-});
+const MongoClient = require('mongodb').MongoClient;
+var db;
 
 const Contacts = function () {};
 
+Contacts.prototype.connectDb = function(callback) {
+    //MONGODB_URL = mongodb://127.0.0.1:27017/aws
+    MongoClient.connect(process.env.MONGODB_URL, function(err, database) {
+        if(err) {
+            callback(err);
+        }
+        
+        db = database.collection('contacts');
+        
+        callback(err, database);
+    });
+};
 
 Contacts.prototype.allContacts = function(callback) {
-    return db.find({}, callback);
+    return db.find({}).toArray(callback);
 };
 
 Contacts.prototype.add = function(contact, callback) {

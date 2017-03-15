@@ -11,5 +11,8 @@ services:
 before_script:
   - npm install grunt-cli -g
 
+env:
+  - MONGODB_URL=mongodb://127.0.0.1:27017/aws
+  
 script:
   - grunt test

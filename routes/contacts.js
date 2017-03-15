@@ -3,12 +3,12 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const dataStore = require('nedb');
+const DataStore = require('nedb');
 
 
 const dbFilename = path.join(__dirname, '../contacts.json');
 
-const db = new dataStore({
+const db = new DataStore({
    filename: dbFilename,
    autoload: true
 });
@@ -40,7 +40,7 @@ router.get('/:name', function (req, res) {
 
 router.post('/', function (req, res) {
     db.insert(req.body, (err, newDoc) => {
-        if (err || newDoc == undefined) {
+        if (err || newDoc === undefined) {
             res.status(404).send({msg: err});
         } else {
             res.status(201).send(req.body);       
@@ -54,9 +54,9 @@ router.put('/:name', function (req, res) {
     const updatedContact = req.body;
     
     db.update({name: name},updatedContact,{},(err, numUpdates) => {
-        if (err || numUpdates == 0) {
+        if (err || numUpdates === 0) {
             res.statusCode = 404;
-            res.send({msg: err})
+            res.send({msg: err});
         } else {
             res.statusCode = 200;
             res.send(numUpdates.toString());

@@ -6,13 +6,27 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "deploy": "git add . ; git commit -m \" Deploy \" ; git push heroku master"
+    "deploy": "git add . ; git commit -m \" Deploy \" ; git push heroku master",
+    "test": "grunt test"
   },
-  "author": "",
+  "author": "Javier Rodriguez",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Javirln/AWS-2017-sandbox.git",
+    "github": "https://github.com/Javirln/AWS-2017-sandbox"
+  },
   "dependencies": {
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
     "nedb": "^1.8.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-mocha-test": "^0.13.2",
+    "mocha": "^3.2.0"
   }
 }

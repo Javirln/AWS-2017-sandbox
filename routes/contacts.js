@@ -39,7 +39,6 @@ router.get('/:name', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    
     db.insert(req.body, (err, newDoc) => {
         if (err || newDoc == undefined) {
             res.status(404).send({msg: err});

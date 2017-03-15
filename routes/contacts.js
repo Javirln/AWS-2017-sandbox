@@ -2,20 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const DataStore = require('nedb');
 
-
-const dbFilename = path.join(__dirname, '../contacts.json');
-
-const db = new DataStore({
-   filename: dbFilename,
-   autoload: true
-});
+const contacts = require('./contact-service');
+console.log(contacts);
 
 router.get('/', function (req, res) {
     
-    db.find({}, (err, contacts) => {
+    contacts.allContacts((err, contacts) => {
         if (err) {
             res.status(404).send({msg: err});
         } else {
@@ -28,7 +21,7 @@ router.get('/', function (req, res) {
 router.get('/:name', function (req, res) {
     const name = req.params.name;
     
-    db.find({name: name}, (err, contact) => {
+    contacts.get(name, (err, contact) => {
         if (err) {
             res.status(404).send({msg: err});
         } else {
@@ -39,7 +32,7 @@ router.get('/:name', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    db.insert(req.body, (err, newDoc) => {
+    contacts.add(req.body, (err, newDoc) => {
         if (err || newDoc === undefined) {
             res.status(404).send({msg: err});
         } else {
@@ -53,7 +46,7 @@ router.put('/:name', function (req, res) {
     const name = req.params.name;
     const updatedContact = req.body;
     
-    db.update({name: name},updatedContact,{},(err, numUpdates) => {
+    contacts.update(name, updatedContact, (err, numUpdates) => {
         if (err || numUpdates === 0) {
             res.statusCode = 404;
             res.send({msg: err});
@@ -67,7 +60,7 @@ router.put('/:name', function (req, res) {
 
 router.delete('/:name', function (req, res) {
     
-    db.remove({name: req.params.name},{multi: true},(err, numRemoved) => {
+    contacts.remove(req.params.name, (err, numRemoved) => {
         if (err) {
             res.status(404).send({msg: err});
         } else {
@@ -80,7 +73,7 @@ router.delete('/:name', function (req, res) {
 
 router.delete('/', function (req, res) {
     
-    db.remove({},{multi: true},(err, numRemoved) => {
+    contacts.removeAll((err, numRemoved) => {
         if (err) {
             res.status(404).send({msg: err});
         } else {

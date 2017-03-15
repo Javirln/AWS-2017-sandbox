@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "deploy": "git add . ; git commit -m \" Deploy \" ; git push heroku master",
-    "test": "grunt test"
+    "deploy": "git add . ; git commit -m \" Deploy \" ; git push heroku master"
   },
   "author": "Javier Rodriguez",
   "license": "ISC",
@@ -23,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-things": "^0.2.0",
     "grunt": "^1.0.1",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-watch": "^1.0.0",

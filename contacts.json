@@ -1,3 +1,13 @@
 {"name":"Manolo","phone":"111222333","email":"manolo@manolo.es","_id":"Le8vxKR0HVhSiJur"}
-{"name":"Antonio","phone":"777888999","email":"antonio@antonio.com","_id":"uv5BgOfLRWAJZ5NE"}
 {"name":"Javi","phone":"444555666","email":"javi@javi.es","_id":"aLKXPhq73Fgywuaz"}
+{"name":"Antonio","phone":"777888999","email":"antonio@antonio.com","_id":"uv5BgOfLRWAJZ5NE"}
+{"$$deleted":true,"_id":"Le8vxKR0HVhSiJur"}
+{"$$deleted":true,"_id":"aLKXPhq73Fgywuaz"}
+{"$$deleted":true,"_id":"uv5BgOfLRWAJZ5NE"}
+{"name":"pepe","phone":"12345","email":"pepe@pepe.com","_id":"Dz7gKvMnCWTOFtS3"}
+{"name":"luis","phone":"67890","email":"luis@pepe.com","_id":"LX2DXrFLVN0bu3NX"}
+{"$$deleted":true,"_id":"Dz7gKvMnCWTOFtS3"}
+{"$$deleted":true,"_id":"LX2DXrFLVN0bu3NX"}
+{"name":"pepe","phone":"12345","email":"pepe@pepe.com","_id":"l8a3em4dICb6pyL7"}
+{"name":"luis","phone":"67890","email":"luis@pepe.com","_id":"k0CnjlW9yR7aIZA8"}
+{"$$deleted":true,"_id":"l8a3em4dICb6pyL7"}

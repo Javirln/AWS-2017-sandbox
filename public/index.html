@@ -33,7 +33,7 @@
                             <tr>
                                 <td><input class="form-control" type="text" ng-model="newContact.name"/></td>
                                 <td><input class="form-control" type="text" ng-model="newContact.phone"/></td>
-                                <td ng-class="{'has error': !newForm.email.$valid}"><input class="form-control" 
+                                <td ng-class="{'has error': !mainForm.email.$valid}"><input class="form-control" 
                                     name="email" type="text" 
                                     required ng-pattern="/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+/" 
                                     ng-model="newContact.email"/></td>

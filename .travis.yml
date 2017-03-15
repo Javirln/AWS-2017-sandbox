@@ -1,18 +1,16 @@
 language: node_js
-
 node_js:
-  - "6"
-
+- '6'
 sudo: required
-
 services:
-  - mongodb
-
+- mongodb
 before_script:
-  - npm install grunt-cli -g
-
+- npm install grunt-cli -g
 env:
-  - MONGODB_URL=mongodb://127.0.0.1:27017/aws
-  
+- MONGODB_URL=mongodb://127.0.0.1:27017/aws
 script:
-  - grunt test
+- grunt test
+deploy:
+  provider: heroku
+  api_key:
+    secure: aeuqyXPIC3S7WueMUduXX1umNG4xu+dKXU6OYS1BkTQJBVUnqfdUUGccN9KIsV12escZbqpE/sVW/cxmxhiQ9D/TN8cYOemtOef2iUTq90buXyuhcV5x3zXVTRv5dOAKXqFlVRNg4O8vhL04HYMZNbYXAXtsWhNopcmorfC9nmffAyMzQNwhzZ1pct0NdhjFV6Ff9xDSZ0LDNREL/weFFBxYeBdvE78WO4z8N/7fY+BrNuk+QoHvvTXfN2K1r91oqQuzfqQFrH9fSqgxFI2bUx/Xobz9nnnmFDSli4iyH3TySjGTabKJELEEz573N2m7KRiMy5yy0FE1JFrOhHckJ0ZhgYd4WRgSbxNNLuUB8zhCeARKfv/0qqVjbmTfz8NlGBpwCUEgPWJOjboKx+hnRyaC5BDwGQuGmCGTXeecMrQbLvOu0GT4L68eVAbFXxMmLsIMV2TwDBgpPanDEX7Zhv8uUbHg8kvwczrhh5c29qh2L6pBwnVGfSXP1wrX8KFo4jlGKRF/wx6q1q3RjyXB5Luqdnfaj/xx50Nf2Tg8SBoF6EtxVZMPoSB1cBr6zCuanABc7vlg2WfIoa3WGNGdkCTuUJ8NPnXXaZiVRbBg3FBYdJgPaJFfrOm8a8+yVlNXErf8tStX4KlYfVHOsonxUguE/4zoUfLpPFYO5uximi0=

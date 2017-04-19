@@ -18,6 +18,7 @@ app.use(baseApi + '/contacts', contacts);
 
 contactsService.connectDb((err) => {
     if (err) {
+        console.log(err);
         console.log("Could not connect with MongoDB");
         process.exit(1);
     }
